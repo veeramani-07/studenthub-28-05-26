@@ -4,6 +4,7 @@ import com.eduhub.eduhub_backed.components.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,6 +28,13 @@ public class StudentController {
 
         return new ResponseEntity<>(stuList, HttpStatus.OK);
 
+    }
+    @GetMapping("{id}/{first}/{last}")
+    public ResponseEntity<Student> getStudentDetails(@PathVariable("id") int id,
+                                                     @PathVariable("first") String f,
+                                                     @PathVariable("last") String l){
+        Student student = new Student(id,f,l);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
 }
